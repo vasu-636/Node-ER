@@ -1,17 +1,19 @@
 const mongoose = require('mongoose');
+
 const filmCategorySchema = new mongoose.Schema({
     film_id: {
-        type:mongoose.Schema.Types.ObjectId.ref("Film"),
-        required:true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Film",
+        required: true
     },
-    category_id:{
-       type:mongoose.Schema.Types.ObjectId.ref("Category"),  
-       required:true
+    category_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        required: true
     },
     last_update: {
         type: Date,
-        default: Date.now(),
-        required : true
+        default: Date.now
     }
 });
 

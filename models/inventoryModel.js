@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-const filmActorSchema = new mongoose.Schema({
-    actor_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Actor",
-        required: true
-    },
+const inventorySchema = new mongoose.Schema({
     film_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Film",
+        required: true
+    },
+    store_id: {
+        type: String,
         required: true
     },
     last_update: {
@@ -17,4 +16,4 @@ const filmActorSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("FilmActor", filmActorSchema);
+module.exports = mongoose.model("Inventory", inventorySchema);
