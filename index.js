@@ -18,6 +18,7 @@ const filmRoutes = require('./routes/filmRoutes');
 const filmActorRoutes = require('./routes/filmActorRoutes');
 const filmCategoryRoutes = require('./routes/filmCategoryRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
+const countryRoutes = require('./routes/countryRoutes');
 
 // Mount Routes
 app.use('/api/actors', actorRoutes);
@@ -27,6 +28,8 @@ app.use('/api/films', filmRoutes);
 app.use('/api/film-actors', filmActorRoutes);
 app.use('/api/film-categories', filmCategoryRoutes);
 app.use('/api/inventories', inventoryRoutes);
+app.use('/api/country', countryRoutes);
+
 
 // Healthcheck Route
 app.get('/', (req, res) => {
