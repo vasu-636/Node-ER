@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const languageController = require('../controllers/languageController');
+const { protect, authorize } = require('../middleware/authMiddleware');
 
+// Public read routes
 router.get('/', languageController.getAllLanguages);
 router.get('/:id', languageController.getLanguageById);
-router.post('/', languageController.createLanguage);
-router.put('/:id', languageController.updateLanguage);
-router.delete('/:id', languageController.deleteLanguage);
+
+// Admin-only write/update/delete routes
+router.post('/', protect, authorize('admin'), languageController.createLanguage);
+router.put('/:id', protect, authorize('admin'), languageController.updateLanguage);
+router.delete('/:id', protect, authorize('admin'), languageController.deleteLanguage);
 
 module.exports = router;

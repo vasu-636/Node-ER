@@ -8,7 +8,8 @@ exports.getAllInventories = async (req, res) => {
         if (req.query.store_id) query.store_id = req.query.store_id;
 
         const inventories = await Inventory.find(query)
-            .populate('film_id', 'title release_year');
+            .populate('film_id', 'title release_year')
+            .populate('store_id');
 
         return res.status(200).json({ success: true, count: inventories.length, data: inventories });
     } catch (error) {
@@ -20,7 +21,8 @@ exports.getAllInventories = async (req, res) => {
 exports.getInventoryById = async (req, res) => {
     try {
         const inventory = await Inventory.findById(req.params.id)
-            .populate('film_id', 'title release_year');
+            .populate('film_id', 'title release_year')
+            .populate('store_id');
 
         if (!inventory) {
             return res.status(404).json({ success: false, message: "Inventory item not found" });
@@ -54,7 +56,8 @@ exports.updateInventory = async (req, res) => {
             { ...req.body, last_update: Date.now() },
             { new: true, runValidators: true }
         )
-            .populate('film_id', 'title release_year');
+            .populate('film_id', 'title release_year')
+            .populate('store_id');
 
         if (!updatedInventory) {
             return res.status(404).json({ success: false, message: "Inventory item not found" });

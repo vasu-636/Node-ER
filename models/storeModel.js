@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 
-const inventorySchema = new mongoose.Schema({
-    film_id: {
+const storeSchema = new mongoose.Schema({
+    manager_staff_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Film",
-        required: true
+        ref: "Staff"
     },
-    store_id: {
+    address_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Store",
+        ref: "Address",
         required: true
     },
     last_update: {
@@ -17,4 +16,4 @@ const inventorySchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Inventory", inventorySchema);
+module.exports = mongoose.model("Store", storeSchema);

@@ -1,33 +1,29 @@
 const Country = require('../models/countryModel');
 
-// Get all country
-exports.getAllCountry = async(req,res) =>{
-     try {
-            const country = await Country.find();
-            return res.status(200).json({ success: true, count: country.length, data: country });
-        } catch (error) {
-            return res.status(500).json({ success: false, message: error.message });
-        }
-}
+// Get all countries
+exports.getAllCountries = async (req, res) => {
+    try {
+        const countries = await Country.find();
+        return res.status(200).json({ success: true, count: countries.length, data: countries });
+    } catch (error) {
+        return res.status(500).json({ success: false, message: error.message });
+    }
+};
 
-
-// Get country by ID 
-
-exports.getCountryById = async (req,res) =>{
+// Get country by ID
+exports.getCountryById = async (req, res) => {
     try {
         const country = await Country.findById(req.params.id);
-        if(!country) {
-            return res.status(404).json({ success: false , message : "Country not found"});
+        if (!country) {
+            return res.status(404).json({ success: false, message: "Country not found" });
         }
-        
-        return res.status(200).json({success : true, data:country});
+        return res.status(200).json({ success: true, data: country });
     } catch (error) {
-        return res.status(404).json({ success: false , message : "Something went wrong", data: null});
-
+        return res.status(500).json({ success: false, message: error.message });
     }
-}
+};
 
-// Create Country
+// Create country
 exports.createCountry = async (req, res) => {
     try {
         const { country } = req.body;
@@ -41,7 +37,7 @@ exports.createCountry = async (req, res) => {
     }
 };
 
-// Update Country
+// Update country
 exports.updateCountry = async (req, res) => {
     try {
         const updatedCountry = await Country.findByIdAndUpdate(
@@ -58,7 +54,7 @@ exports.updateCountry = async (req, res) => {
     }
 };
 
-// Delete Country
+// Delete country
 exports.deleteCountry = async (req, res) => {
     try {
         const deletedCountry = await Country.findByIdAndDelete(req.params.id);
