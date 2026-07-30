@@ -4,8 +4,8 @@ const languageController = require('../controllers/languageController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
 // Public read routes
-router.get('/', languageController.getAllLanguages);
-router.get('/:id', languageController.getLanguageById);
+router.get('/', protect, authorize('admin','staff'),languageController.getAllLanguages);
+router.get('/:id', protect, authorize('admin','staff'),languageController.getLanguageById);
 
 // Admin-only write/update/delete routes
 router.post('/', protect, authorize('admin'), languageController.createLanguage);

@@ -4,8 +4,8 @@ const filmController = require('../controllers/filmController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
 // Public read routes
-router.get('/', filmController.getAllFilms);
-router.get('/:id', filmController.getFilmById);
+router.get('/',protect, authorize('admin','staff'),filmController.getAllFilms);
+router.get('/:id',protect, authorize('admin','staff'),filmController.getFilmById);
 
 // Admin-only write/update/delete routes
 router.post('/', protect, authorize('admin'), filmController.createFilm);

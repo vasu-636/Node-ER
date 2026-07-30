@@ -4,8 +4,8 @@ const categoryController = require('../controllers/categoryController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
 // Public read routes
-router.get('/', categoryController.getAllCategories);
-router.get('/:id', categoryController.getCategoryById);
+router.get('/', protect, authorize('admin','staff'),categoryController.getAllCategories);
+router.get('/:id', protect, authorize('admin','staff'),categoryController.getCategoryById);
 
 // Admin-only write/update/delete routes
 router.post('/', protect, authorize('admin'), categoryController.createCategory);
